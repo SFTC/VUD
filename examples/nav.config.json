@@ -1,0 +1,42 @@
+[
+
+  {
+    "name": "开发指南",
+    "groups": [
+      {
+        "list": [
+          {
+            "path": "/installation",
+            "title": "安装"
+          },
+          {
+            "path": "/quickstart",
+            "title": "快速上手"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "表格表单",
+    "groups": [
+      {
+        "groupName": "From",
+        "list": [
+          {
+            "path": "/formtable",
+            "title": "表格"
+          },
+          {
+            "path": "/multiselect",
+            "title": "多选"
+          },
+          {
+            "path": "/formdialog",
+            "title": "表单"
+          }
+        ]
+      }   
+    ]
+  }
+]
