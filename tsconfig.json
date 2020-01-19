@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors":true,
     "sourceMap": true,
     "allowJs": true,
     "baseUrl": ".",
@@ -30,13 +31,14 @@
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/form-table/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx", 
     "@types/shims-vue.d.ts", 
-    "@types/shims-tsx.d.ts"
+    "@types/shims-tsx.d.ts", "packages/form-dialog/index.js",
+    
   ],
   "exclude": [
     "node_modules"
