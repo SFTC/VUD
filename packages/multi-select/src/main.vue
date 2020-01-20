@@ -45,9 +45,8 @@
 </template>
 
 <script lang="ts">
-// @ts-nocheck
 
-import Emitter from '../../../lib/emitter';
+import Emitter from '../../lib/emitter';
 import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
 import Clickoutside from 'element-ui/lib/utils/clickoutside';
 

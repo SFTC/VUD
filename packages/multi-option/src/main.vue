@@ -10,9 +10,8 @@
 </template>
 
 <script lang="ts">
-// @ts-nocheck
 import { Component, Mixins, Prop } from 'vue-property-decorator';
-import Emitter from '../../../lib/emitter';
+import Emitter from '../../lib/emitter';
 
 @Component
 export default class MultiOption extends Mixins(Emitter) {
