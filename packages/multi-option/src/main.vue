@@ -27,7 +27,7 @@ export default class MultiOption extends Mixins(Emitter) {
 
   private selected: boolean = false;
   private hide: boolean = false;
-  public handleInitSelect(bool) {
+  public handleInitSelect(bool: boolean) {
     this.selected = bool;
   }
 
@@ -36,7 +36,7 @@ export default class MultiOption extends Mixins(Emitter) {
     this.dispatch('MultiSelect', 'selectItem', this);
   }
 
-  public handleUpdate(val) {
+  public handleUpdate(val: any) {
     (val === this.value) && (this.selected = true);
   }
 
