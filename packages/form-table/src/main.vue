@@ -146,8 +146,6 @@ export default class FormTable extends Vue {
    */
   @Prop({default: {}}) public tableOperation!: object;
   @Prop({default: () => void 0}) public queryFunc!: any;
-  // 筛选项深度监听自动查询列表 第一次赋值data时查询列表(页面进来自动查询一次列表)
-  @Watch('pageFilter', {deep: true})
 
   private loading = false;
   private currentPage = 1;
@@ -220,10 +218,11 @@ export default class FormTable extends Vue {
   private mounted(): void {
     this.handleCurrentChange(1);
   }
-  // tslint:disable-next-line:align
-  // private onNameChange(); {
-  //   this.$emit('setQueryFilter', { ...this.pageFilter, currentPage: this.currentPage });
-  // }
+  // 筛选项深度监听自动查询列表 第一次赋值data时查询列表(页面进来自动查询一次列表)
+  @Watch('pageFilter', {deep: true})
+  private onPageFilterChange() {
+    this.$emit('setQueryFilter', { ...this.pageFilter, currentPage: this.currentPage });
+  }
   }
 </script>
 <style lang="less" scoped>

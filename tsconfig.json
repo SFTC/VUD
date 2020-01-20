@@ -21,6 +21,9 @@
     "paths": {
       "@": [
         "examples/*"
+      ],
+      "@packages":[
+        "packages/*"
       ]
     },
     "lib": [
@@ -34,11 +37,11 @@
     "packages/**/*.ts",
     "packages/**/*.tsx",
     "packages/form-table/*.vue",
+    "packages/form-dialog/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx", 
     "@types/shims-vue.d.ts", 
-    "@types/shims-tsx.d.ts", "packages/form-dialog/index.js",
-    
+    "@types/shims-tsx.d.ts" 
   ],
   "exclude": [
     "node_modules"
