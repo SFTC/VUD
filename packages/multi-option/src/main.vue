@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop } from 'vue-property-decorator';
-import Emitter from '../../lib/emitter';
+import Emitter from '../../utils/emitter';
 
 @Component
 export default class MultiOption extends Mixins(Emitter) {
