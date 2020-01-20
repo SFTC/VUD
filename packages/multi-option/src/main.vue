@@ -1,3 +1,4 @@
+
 <template>
   <li
       class="el-select-dropdown__item"
@@ -8,49 +9,49 @@
   </li>
 </template>
 
-<script>
-// element自带工具函数, dispatch和brocast，向上派发和向下派发事件
-import Emitter from 'element-ui/lib/mixins/emitter'
+<script lang="ts">
+// @ts-nocheck
+import { Component, Mixins, Prop } from 'vue-property-decorator'
+import Emitter from '../../../lib/emitter'
 
-export default {
-  mixins: [Emitter],
-  name: 'MultiOption',
-  // 必须注明组件名，不然dispatch和brocast都无效
-  componentName: 'MultiOption',
-  props: {
-    value: [String, Number],
-    label: [String, Number]
-  },
-  data () {
-    return {
-      selected: false,
-      hide: false
-    }
-  },
-  methods: {
-    handleInitSelect (bool) {
-      this.selected = bool
-    },
-    handleClick () {
-      this.selected = !this.selected
-      this.dispatch('MultiSelect', 'selectItem', this)
-    },
-    handleUpdate (val) {
-      // eslint-disable-next-line
-      (val === this.value) ? this.selected = true : undefined;
-    }
-  },
-  created () {
+@Component
+export default class MultiOption extends Mixins(Emitter) {
+  @Prop({
+    type: [String, Number]
+  })
+  readonly value: string | number | undefined
+  @Prop({
+    type: [String, Number]
+  })
+  readonly label: string | number | undefined
+
+  selected: boolean = false
+  hide: boolean = false
+  componentName: string = 'MultiOption'
+  handleInitSelect(bool) {
+    this.selected = bool
+  }
+
+  handleClick() {
+    this.selected = !this.selected
+    this.dispatch('MultiSelect', 'selectItem', this)
+  }
+
+  handleUpdate(val) {
+    val === this.value ? this.selected = true : undefined
+  }
+
+  created() {
+    this.componentName='MultiOption'
     this.$on('initSelected', this.handleInitSelect)
     this.$on('updateSelected', this.handleUpdate)
-
-    // 级联数据发生变化时，触发创建事件，此时向上派发数据变化信息
-    this.dispatch('MultiSelect', 'optionsChange')
-  },
-  // 级联数据发生变化时，触发销毁事件，此时向上派发数据变化信息
-  beforeDestroy () {
     this.dispatch('MultiSelect', 'optionsChange')
   }
+
+  beforeDestroy() {
+    this.dispatch('MultiSelect', 'optionsChange')
+  }
+
 }
 </script>
 

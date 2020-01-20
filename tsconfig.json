@@ -13,6 +13,7 @@
     "sourceMap": true,
     "allowJs": true,
     "baseUrl": ".",
+    "strictFunctionTypes": false,
     "types": [
       "webpack-env",
       "mocha",
