@@ -8,7 +8,7 @@ Vue.use(element)
 Vue.axios = axios
 
 import SfVUEUI from '../packages/index'
-import '../lib/sf-vue-ui.css'
+// import '../lib/sf-vue-ui.css'
 // import SfVUEUI from 'sf-vue-ui'
 Vue.use(SfVUEUI)
 

@@ -44,206 +44,216 @@
   </div>
 </template>
 
-<script>
-// element自带工具指令
-// 原理参见 https://github.com/ElemeFE/element/blob/dev/src/utils/clickoutside.js
-import Clickoutside from 'element-ui/lib/utils/clickoutside'
-// element自带工具函数, dispatch和brocast，向上派发和向下派发事件
-import Emitter from 'element-ui/lib/mixins/emitter'
+<script lang="ts">
+// @ts-nocheck
 
-/* eslint-disable no-underscore-dangle */
-export default {
-  name: 'MultiSelect',
+import Emitter from '../../../lib/emitter';
+import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
+import Clickoutside from 'element-ui/lib/utils/clickoutside';
+
+@Component({
   // 必须注明组件名，不然dispatch和brocast都无效
-  componentName: 'MultiSelect',
-  props: {
-    value: Array,
-    placeholder: String,
-    disabled: Boolean
-  },
   directives: { Clickoutside },
-  mixins: [Emitter],
-  created () {
-    this.$on('selectItem', this.selectItem)
-    this.$on('optionsChange', this.optionsChange)
-    // 初始化获取列表长度，显示的文字
-    this.$nextTick(() => {
-      this.optionsLength = this.$children.length
-      // 如果value有初始值
-      if (this.value.length && Array.isArray(this.value)) {
-        this.selectWord = this.getwords()
-        this.isAll = this.checkSelectAll()
-        // 更新每个选项的选中状态
-        this.value.forEach((val) => {
-          this.broadcast('MultiOption', 'updateSelected', val)
-        })
-      } else {
-        this.selectWord = this.isAll ? '全选' : ''
-      }
-    })
-    // 如果默认为全选
-    // 我不知道什么时候逻辑会走到这个分支？by lichun
-    // 这个是当初设想如果需要默认全选的情况，就走这个分支，但是现在好像没这个需求。by maoyuyang
-    if (this.isAll) {
-      const value = this.value.slice()
-      // push所有值，派发全选状态
-      this.$nextTick(() => {
-        this.$children.forEach((item) => {
-          value.push(item.value)
-        })
-        this.$emit('input', value)
-        this.broadcast('MultiOption', 'initSelected', this.isAll)
-      })
-    }
-  },
-  data () {
-    return {
-      isFocus: false,
-      isAll: false,
-      isEmpty: false,
-      isSelecting: false,
-      selectWord: '',
-      searchVal: '',
-      matchNum: 0,
-      optionsLength: 0
-    }
-  },
-  watch: {
-    // 监听传进来的value，回显用
-    value () {
-      this.$nextTick(() => {
-        const selectNum = this.value.length
-        this.isAll = this.checkSelectAll()
-        this.selectWord = this.getwords()
-        if (selectNum === 0) {
-          this.broadcast('MultiOption', 'initSelected', false)
-        } else if (selectNum === this.optionsLength) {
-          this.broadcast('MultiOption', 'initSelected', true)
-        } else {
-          // 此处代码是为了在外部value动态改变时，更新子选项的选中状态
-          // 但是点选item时，也会触发，导致无用循环，多遍历了2次，所以加了一个标志位
-          // eslint-disable-next-line
-          if (!this.isSelecting) {
-            // 重置
-            this.broadcast('MultiOption', 'initSelected', false)
-            // 更新每个选项的选中状态
-            this.value.forEach((val) => {
-              this.broadcast('MultiOption', 'updateSelected', val)
-            })
-          }
-        }
-        this.isSelecting = false
-      })
-    }
-  },
-  methods: {
-    checkSelectAll () {
-      if (this.$children.length !== this.optionsLength) {
-        this.optionsLength = this.$children.length
-      }
-      const selectNum = this.value.length
-      return (selectNum === this.optionsLength && selectNum !== 0)
-    },
-    getwords () {
-      // 只显示前两个选择，多于两个折叠
-      const selectNum = this.value.length
-      let words
+})
+export default class MultiSelect extends Mixins(Emitter) {
+  @Prop({
+    type: Array,
+  })
+  public readonly value: any[] | undefined;
+  @Prop({
+    type: String,
+  })
+  public readonly placeholder: string | undefined;
+  @Prop({
+    type: Boolean,
+  })
+  public readonly disabled: boolean | undefined;
 
-      if (selectNum === 1) {
-        // 找第一个被选中的
-        words = this.traverseAndGetName(this.value[0])
-      } else if (selectNum === 2) {
-        // 找第前两个被选中的
-        const temp1 = this.traverseAndGetName(this.value[0])
-        const temp2 = this.traverseAndGetName(this.value[1])
-        words = `${temp1} ，${temp2}`
-      } else if (selectNum === 0) {
-        words = ''
+  public  ComponentName: string = 'MultiSelect';
+
+  public componentName: 'MultiSelect';
+  private isFocus: boolean = false;
+  private isAll: boolean = false;
+  private isEmpty: boolean = false;
+  private isSelecting: boolean = false;
+  private selectWord: string = '';
+  private searchVal: string = '';
+  private matchNum: number = 0;
+  private optionsLength: number = 0;
+
+  public created() {
+    this.$on('selectItem', this.selectItem);
+    this.$on('optionsChange', this.optionsChange);
+    this.$nextTick(() => {
+      this.optionsLength = this.$children.length;
+      if (this.value.length && Array.isArray(this.value)) {
+        this.selectWord = this.getwords();
+        this.isAll = this.checkSelectAll();
+        this.value.forEach((val) => {
+          this.broadcast('MultiOption', 'updateSelected', val);
+        });
       } else {
-        words = `${selectNum}个选择`
+        this.selectWord = this.isAll ? '全选' : '';
       }
-      return words
-    },
-    traverseAndGetName (val) {
-      const options = this.$children
-      for (let i = 0; i < options.length; i++) {
-        if (val === options[i].value) {
-          return options[i].label
-        }
-      }
-      return ''
-    },
-    // 监听子组件的options数据，需要动态更新子选项的数目，因为级联数据随时会变
-    // 缺点就是性能比较差,因为每个option都会触发一次，好处就是外部不需要传options选项来监听
-    optionsChange () {
+    });
+
+    if (this.isAll) {
+      const value = this.value.slice();
       this.$nextTick(() => {
-        const length = this.$children.length
-        if (length === this.optionsLength) return
-        this.optionsLength = length
-      })
-    },
-    handleClick () {
-      if (this.disabled) {
-        return
-      }
-      if (this.isFocus) {
-        this.$refs.input.blur()
-        this.handleOut()
-        return
-      }
-      this.isFocus = !this.isFocus
-    },
-    handleOut () {
-      this.isFocus = false
-      this.isEmpty = false
-    },
-    // 搜索
-    handleSearch (e) {
-      const val = e.target.value
-      const len = this.optionsLength
-      // 正则匹配
-      const regExp = new RegExp(val, '')
-      this.searchVal = val
-      for (let i = 0; i < len; i++) {
-        const item = this.$children[i]
-        const match = regExp.test(item.label)
-        if (match) {
-          item.hide = false
-          this.matchNum++
-        } else {
-          item.hide = true
-        }
-        if (i === len - 1) {
-          /* eslint-disable no-unused-expressions */
-          this.matchNum === 0 ? (this.isEmpty = true) : (this.isEmpty = false)
-        }
-      }
-      this.matchNum = 0
-    },
-    // 选一个时，子组件触发此事件
-    selectItem (item) {
-      const value = this.value.slice()
-      const index = value.indexOf(item.value)
-      if (index === -1) {
-        value.push(item.value)
-      } else {
-        value.splice(index, 1)
-      }
-      this.isSelecting = true
-      this.$emit('input', value)
-    },
-    // 全选按钮
-    selectAll () {
-      const value = []
-      this.isAll = !this.isAll
-      if (this.isAll) {
         this.$children.forEach((item) => {
-          value.push(item.value)
-        })
-      }
-      this.$emit('input', value)
+          value.push(item.value);
+        });
+        this.$emit('input', value);
+        this.broadcast('MultiOption', 'initSelected', this.isAll);
+      });
     }
   }
+
+
+  @Watch('value')
+  public onValueChanged() {
+    this.$nextTick(() => {
+      const selectNum = this.value.length;
+      this.isAll = this.checkSelectAll();
+      this.selectWord = this.getwords();
+
+      if (selectNum === 0) {
+        this.broadcast('MultiOption', 'initSelected', false);
+      } else if (selectNum === this.optionsLength) {
+        this.broadcast('MultiOption', 'initSelected', true);
+      } else {
+        if (!this.isSelecting) {
+          this.broadcast('MultiOption', 'initSelected', false);
+          this.value.forEach((val) => {
+            this.broadcast('MultiOption', 'updateSelected', val);
+          });
+        }
+      }
+
+      this.isSelecting = false;
+    });
+  }
+
+  public checkSelectAll() {
+    if (this.$children.length !== this.optionsLength) {
+      this.optionsLength = this.$children.length;
+    }
+
+    const selectNum = this.value.length;
+    return selectNum === this.optionsLength && selectNum !== 0;
+  }
+
+  public getwords() {
+    const selectNum = this.value.length;
+    let words;
+
+    if (selectNum === 1) {
+      words = this.traverseAndGetName(this.value[0]);
+    } else if (selectNum === 2) {
+      const temp1 = this.traverseAndGetName(this.value[0]);
+      const temp2 = this.traverseAndGetName(this.value[1]);
+      words = `${temp1} ，${temp2}`;
+    } else if (selectNum === 0) {
+      words = '';
+    } else {
+      words = `${selectNum}个选择`;
+    }
+
+    return words;
+  }
+
+  public traverseAndGetName(val) {
+    const options = this.$children;
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < options.length; i++) {
+      if (val === options[i].value) {
+        return options[i].label;
+      }
+    }
+
+    return '';
+  }
+
+  public optionsChange() {
+    this.$nextTick(() => {
+      const length = this.$children.length;
+      if (length === this.optionsLength) { return; }
+      this.optionsLength = length;
+    });
+  }
+
+  public handleClick() {
+    if (this.disabled) {
+      return;
+    }
+
+    if (this.isFocus) {
+      (this.$refs.input as any).blur();
+      this.handleOut();
+      return;
+    }
+
+    this.isFocus = !this.isFocus;
+  }
+
+  public handleOut() {
+    this.isFocus = false;
+    this.isEmpty = false;
+  }
+
+  public handleSearch(e) {
+    const val = e.target.value;
+    const len = this.optionsLength;
+    const regExp = new RegExp(val, '');
+    this.searchVal = val;
+
+    for (let i = 0; i < len; i++) {
+      const item = this.$children[i];
+      const match = regExp.test(item.label);
+
+      if (match) {
+        item.hide = false;
+        this.matchNum++;
+      } else {
+        item.hide = true;
+      }
+
+      if (i === len - 1) {
+        this.matchNum === 0 ? this.isEmpty = true : this.isEmpty = false;
+      }
+    }
+
+    this.matchNum = 0;
+  }
+
+  public selectItem(item) {
+    const value = this.value.slice();
+    const index = value.indexOf(item.value);
+
+    if (index === -1) {
+      value.push(item.value);
+    } else {
+      value.splice(index, 1);
+    }
+
+    this.isSelecting = true;
+    this.$emit('input', value);
+  }
+
+  public selectAll() {
+    const value: any[] = [];
+    this.isAll = !this.isAll;
+
+    if (this.isAll) {
+      this.$children.forEach((item: any) => {
+        value.push(item.value);
+      });
+    }
+
+    this.$emit('input', value);
+  }
+
 }
 </script>
 
