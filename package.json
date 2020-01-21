@@ -8,7 +8,8 @@
     "lib": "vue-cli-service build --target lib --name sf-vue-ui --dest lib packages/index.js",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "test:cov": "vue-cli-service test:unit --coverage"
   },
   "dependencies": {
     "core-js": "^3.4.3",
