@@ -10,11 +10,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop } from 'vue-property-decorator';
-import Emitter from '../../utils/emitter';
+import { Component, Mixins, Prop, Vue } from 'vue-property-decorator';
+// import Emitter from '../../utils/emitter';
+// import Emitter from 'element-ui/lib/mixins/emitter';
 
 @Component
-export default class MultiOption extends Mixins(Emitter) {
+export default class MultiOption extends Vue {
   @Prop({
     type: [String, Number],
   })
@@ -27,6 +28,22 @@ export default class MultiOption extends Mixins(Emitter) {
 
   private selected: boolean = false;
   private hide: boolean = false;
+  public dispatch(componentName: string, eventName: string, params?: any) {
+    let parent = this.$parent || this.$root;
+    let name = parent.$options.name;
+
+    while (parent && (!name || name !== componentName)) {
+      parent = parent.$parent;
+
+      if (parent) {
+        name = parent.$options.name;
+      }
+    }
+    if (parent) {
+      // @ts-ignore
+      parent.$emit.apply(parent, [eventName].concat(params));
+    }
+  }
   public handleInitSelect(bool: boolean) {
     this.selected = bool;
   }

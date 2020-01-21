@@ -46,19 +46,33 @@
 
 <script lang="ts">
 
-import Emitter from '../../utils/emitter';
-import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
+// import Emitter from '../../utils/emitter';
+import { Component, Prop, Mixins, Watch, Vue } from 'vue-property-decorator';
 import Clickoutside from 'element-ui/lib/utils/clickoutside';
+// import Emitter from 'element-ui/lib/mixins/emitter';
+
+function _broadcast(componentName: string, eventName: string, params: any) {
+  // @ts-ignore
+  this.$children.forEach((child: any) => {
+    const name = child.$options.name;
+    if (name === componentName) {
+      child.$emit.apply(child, [eventName].concat(params));
+    } else {
+      // @ts-ignore
+      _broadcast.apply(child, [componentName, eventName].concat([params]));
+    }
+  });
+}
 
 @Component({
   // 必须注明组件名，不然dispatch和brocast都无效
   directives: { Clickoutside },
 })
-export default class MultiSelect extends Mixins(Emitter) {
+export default class MultiSelect extends Vue {
   @Prop({
     type: Array,
   })
-  public readonly value: any[] | undefined;
+  public readonly value!: string[];
   @Prop({
     type: String,
   })
@@ -70,7 +84,6 @@ export default class MultiSelect extends Mixins(Emitter) {
 
   public  ComponentName: string = 'MultiSelect';
 
-  public componentName: 'MultiSelect';
   private isFocus: boolean = false;
   private isAll: boolean = false;
   private isEmpty: boolean = false;
@@ -79,6 +92,26 @@ export default class MultiSelect extends Mixins(Emitter) {
   private searchVal: string = '';
   private matchNum: number = 0;
   private optionsLength: number = 0;
+
+  public dispatch(componentName: string, eventName: string, params: any) {
+    let parent = this.$parent || this.$root;
+    let name = parent.$options.name;
+
+    while (parent && (!name || name !== componentName)) {
+      parent = parent.$parent;
+
+      if (parent) {
+        name = parent.$options.name;
+      }
+    }
+    if (parent) {
+      // @ts-ignore
+      parent.$emit.apply(parent, [eventName].concat(params));
+    }
+  }
+  public broadcast(componentName: string, eventName: string, params: any) {
+    _broadcast.call(this, componentName, eventName, params);
+  }
 
   public created() {
     this.$on('selectItem', this.selectItem);
@@ -99,7 +132,7 @@ export default class MultiSelect extends Mixins(Emitter) {
     if (this.isAll) {
       const value = this.value.slice();
       this.$nextTick(() => {
-        this.$children.forEach((item) => {
+        this.$children.forEach((item: any) => {
           value.push(item.value);
         });
         this.$emit('input', value);
@@ -161,8 +194,8 @@ export default class MultiSelect extends Mixins(Emitter) {
     return words;
   }
 
-  public traverseAndGetName(val) {
-    const options = this.$children;
+  public traverseAndGetName(val: string) {
+    const options: any = this.$children;
 
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < options.length; i++) {
@@ -201,14 +234,14 @@ export default class MultiSelect extends Mixins(Emitter) {
     this.isEmpty = false;
   }
 
-  public handleSearch(e) {
+  public handleSearch(e: any) {
     const val = e.target.value;
     const len = this.optionsLength;
     const regExp = new RegExp(val, '');
     this.searchVal = val;
 
     for (let i = 0; i < len; i++) {
-      const item = this.$children[i];
+      const item: any = this.$children[i];
       const match = regExp.test(item.label);
 
       if (match) {
@@ -226,7 +259,7 @@ export default class MultiSelect extends Mixins(Emitter) {
     this.matchNum = 0;
   }
 
-  public selectItem(item) {
+  public selectItem(item: any) {
     const value = this.value.slice();
     const index = value.indexOf(item.value);
 
