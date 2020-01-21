@@ -194,7 +194,7 @@ export default class FormTable extends Vue {
         const params = Object.assign(this.queryFilter, {
           prepage: this.pageSize,
         });
-        this.queryFunc(params)
+        this.queryFunc && this.queryFunc(params)
         .then((res: any) => {
           this.loading = false;
           if (res.errno === 0) {
