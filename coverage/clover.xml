@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1580804356899" clover="3.2.0">
-  <project timestamp="1580804356899" name="All files">
-    <metrics statements="218" coveredstatements="67" conditionals="97" coveredconditionals="12" methods="56" coveredmethods="15" elements="371" coveredelements="94" complexity="0" loc="218" ncloc="218" packages="4" files="4" classes="4"/>
+<coverage generated="1580810145834" clover="3.2.0">
+  <project timestamp="1580810145834" name="All files">
+    <metrics statements="218" coveredstatements="68" conditionals="97" coveredconditionals="12" methods="56" coveredmethods="16" elements="371" coveredelements="96" complexity="0" loc="218" ncloc="218" packages="4" files="4" classes="4"/>
     <package name="form-dialog.src">
       <metrics statements="26" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="0"/>
       <file name="main.vue" path="/Users/sf/Desktop/vud-jest/VUD/packages/form-dialog/src/main.vue">
@@ -88,33 +88,33 @@
       </file>
     </package>
     <package name="multi-option.src">
-      <metrics statements="25" coveredstatements="17" conditionals="11" coveredconditionals="5" methods="7" coveredmethods="3"/>
+      <metrics statements="25" coveredstatements="18" conditionals="11" coveredconditionals="5" methods="7" coveredmethods="4"/>
       <file name="main.vue" path="/Users/sf/Desktop/vud-jest/VUD/packages/multi-option/src/main.vue">
-        <metrics statements="25" coveredstatements="17" conditionals="11" coveredconditionals="5" methods="7" coveredmethods="3"/>
+        <metrics statements="25" coveredstatements="18" conditionals="11" coveredconditionals="5" methods="7" coveredmethods="4"/>
         <line num="13" count="1" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="32" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="35" count="1" type="cond" truecount="2" falsecount="1"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="38" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="32" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="35" count="4" type="cond" truecount="2" falsecount="1"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="38" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="39" count="0" type="stmt"/>
-        <line num="42" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="44" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
         <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="58" count="0" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
+        <line num="63" count="4" type="stmt"/>
+        <line num="64" count="4" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
+        <line num="66" count="4" type="stmt"/>
         <line num="70" count="0" type="stmt"/>
       </file>
     </package>
