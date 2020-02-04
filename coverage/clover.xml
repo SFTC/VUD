@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1580789307134" clover="3.2.0">
-  <project timestamp="1580789307134" name="All files">
+<coverage generated="1580792148396" clover="3.2.0">
+  <project timestamp="1580792148396" name="All files">
     <metrics statements="218" coveredstatements="67" conditionals="97" coveredconditionals="12" methods="56" coveredmethods="15" elements="371" coveredelements="94" complexity="0" loc="218" ncloc="218" packages="4" files="4" classes="4"/>
     <package name="form-dialog.src">
       <metrics statements="26" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="0"/>
-      <file name="main.vue" path="/Users/sf/Documents/new-test/vue-jest/packages/form-dialog/src/main.vue">
+      <file name="main.vue" path="/Users/sf/Desktop/vud-jest/VUD/packages/form-dialog/src/main.vue">
         <metrics statements="26" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="0"/>
         <line num="80" count="0" type="stmt"/>
         <line num="85" count="0" type="stmt"/>
@@ -36,7 +36,7 @@
     </package>
     <package name="form-table.src">
       <metrics statements="47" coveredstatements="27" conditionals="18" coveredconditionals="1" methods="15" coveredmethods="9"/>
-      <file name="main.vue" path="/Users/sf/Documents/new-test/vue-jest/packages/form-table/src/main.vue">
+      <file name="main.vue" path="/Users/sf/Desktop/vud-jest/VUD/packages/form-table/src/main.vue">
         <metrics statements="47" coveredstatements="27" conditionals="18" coveredconditionals="1" methods="15" coveredmethods="9"/>
         <line num="103" count="1" type="stmt"/>
         <line num="106" count="2" type="stmt"/>
@@ -89,7 +89,7 @@
     </package>
     <package name="multi-option.src">
       <metrics statements="25" coveredstatements="17" conditionals="11" coveredconditionals="5" methods="7" coveredmethods="3"/>
-      <file name="main.vue" path="/Users/sf/Documents/new-test/vue-jest/packages/multi-option/src/main.vue">
+      <file name="main.vue" path="/Users/sf/Desktop/vud-jest/VUD/packages/multi-option/src/main.vue">
         <metrics statements="25" coveredstatements="17" conditionals="11" coveredconditionals="5" methods="7" coveredmethods="3"/>
         <line num="13" count="1" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
@@ -120,7 +120,7 @@
     </package>
     <package name="multi-select.src">
       <metrics statements="120" coveredstatements="23" conditionals="56" coveredconditionals="6" methods="24" coveredmethods="3"/>
-      <file name="main.vue" path="/Users/sf/Documents/new-test/vue-jest/packages/multi-select/src/main.vue">
+      <file name="main.vue" path="/Users/sf/Desktop/vud-jest/VUD/packages/multi-select/src/main.vue">
         <metrics statements="120" coveredstatements="23" conditionals="56" coveredconditionals="6" methods="24" coveredmethods="3"/>
         <line num="50" count="1" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
