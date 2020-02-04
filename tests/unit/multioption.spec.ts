@@ -20,7 +20,7 @@ describe('multiOption.vue', () => {
     const handleInitSelect = await (wrapper.vm as any).handleInitSelect();
     expect(handleInitSelect).toBe(undefined);
   });
-  test('测试事件', () => {
+  it('测试事件', () => {
     const stub = jest.fn(); // 伪造一个jest的mock funciton
     const wrapper = mount(multiOption);
     wrapper.setMethods({ handleClick: stub }); // setMethods将handleClick这个方法覆写
