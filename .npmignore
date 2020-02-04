@@ -5,6 +5,7 @@ node_modules/
 public/
 src/
 dist/
+coverage/
 
 # 忽略指定文件
 .editorconfig
