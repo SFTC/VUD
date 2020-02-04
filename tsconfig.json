@@ -9,15 +9,21 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors":true,
     "sourceMap": true,
+    "allowJs": true,
     "baseUrl": ".",
+    "strictFunctionTypes": false,
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
     ],
     "paths": {
-      "@/*": [
-        "src/*"
+      "@": [
+        "examples/*"
+      ],
+      "@packages":[
+        "packages/*"
       ]
     },
     "lib": [
@@ -28,11 +34,13 @@
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
+    "packages/form-table/*.ts",
+    "packages/**/*.tsx",
+    "packages/form-table/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx", 
+    "@types/shims-vue.d.ts", 
+    "@types/shims-tsx.d.ts" 
   ],
   "exclude": [
     "node_modules"
