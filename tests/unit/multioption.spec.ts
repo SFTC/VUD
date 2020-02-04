@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import multiOption from '../../packages/multi-option/src/main.vue';
 
 describe('multiOption.vue', () => {

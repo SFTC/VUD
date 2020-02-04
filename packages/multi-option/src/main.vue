@@ -54,7 +54,9 @@ export default class MultiOption extends Vue {
   }
 
   public handleUpdate(val: any) {
-    (val === this.value) && (this.selected = true);
+    if (val === this.value) {
+      this.selected = true;
+    }
   }
 
   public created() {

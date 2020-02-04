@@ -117,8 +117,8 @@ export default class MultiSelect extends Vue {
     this.$on('selectItem', this.selectItem);
     this.$on('optionsChange', this.optionsChange);
     this.$nextTick(() => {
-      this.optionsLength = this.$children.length;
-      if (this.value.length && Array.isArray(this.value)) {
+      this.optionsLength = this.$children && this.$children.length;
+      if (this.value && this.value.length && Array.isArray(this.value)) {
         this.selectWord = this.getwords();
         this.isAll = this.checkSelectAll();
         this.value.forEach((val) => {

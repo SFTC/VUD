@@ -11,7 +11,6 @@
   "rules": {
     "indent": [true, "spaces", 2],
     "interface-name": false,
-    "no-unused-expression": false,
     "no-consecutive-blank-lines": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,

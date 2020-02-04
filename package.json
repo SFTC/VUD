@@ -1,22 +1,24 @@
 {
-  "name": "vue-test",
+  "name": "vue-jest",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lib": "vue-cli-service build --target lib --name sf-vue-ui --dest lib packages/index.js",
-    "lint": "vue-cli-service lint",
-    "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "test:coverage": "vue-cli-service test:unit --coverage"
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.4.3",
+    "axios": "^0.19.2",
+    "core-js": "^3.4.4",
+    "element-ui": "^2.13.0",
+    "github-markdown-css": "^3.0.1",
+    "marked": "^0.8.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.3.0",
-    "vue-router": "^3.1.3"
+    "vue-router": "^3.1.5"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",
@@ -26,20 +28,11 @@
     "@vue/cli-plugin-unit-jest": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "@vue/test-utils": "1.0.0-beta.29",
-    "axios": "^0.19.0",
     "chromedriver": "79",
-    "element-ui": "^2.8.2",
-    "eslint": "^5.8.0",
-    "eslint-plugin-html": "^5.0.3",
-    "eslint-plugin-vue": "^5.0.0",
-    "eslint-plugin-vue-libs": "^3.0.0",
     "geckodriver": "^1.19.1",
-    "github-markdown-css": "^3.0.1",
-    "highlight.js": "^9.15.8",
-    "less": "^3.9.0",
-    "less-loader": "^4.1.0",
-    "marked": "^0.6.2",
-    "raw-loader": "^2.0.0",
+    "less": "^3.0.4",
+    "less-loader": "^5.0.0",
+    "raw-loader": "^4.0.0",
     "typescript": "~3.5.3",
     "vue-template-compiler": "^2.6.10"
   }

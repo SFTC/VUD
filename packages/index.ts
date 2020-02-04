@@ -1,17 +1,17 @@
-// import MultiSelect from './multi-select';
-// import MultiOption from './multi-option';
+import MultiSelect from './multi-select';
+import MultiOption from './multi-option';
 import FormTable from './form-table';
 // import FormDialog from './form-dialog';
 // 组件列表
 const components = [
-  // MultiSelect,
-  // MultiOption,
+  MultiSelect,
+  MultiOption,
   FormTable,
   // FormDialog,
 ];
 const componentsName: string[] = [
-  // 'MultiSelect',
-  // 'MultiOption',
+  'MultiSelect',
+  'MultiOption',
   'FormTable',
   // 'FormDialog',
 ];
@@ -26,8 +26,8 @@ const install =  (Vue: any, opts: any) => {
 // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
 export default {
   install,
-  // MultiOption,
-  // MultiSelect,
+  MultiOption,
+  MultiSelect,
   // FormDialog,
   FormTable,
 };
