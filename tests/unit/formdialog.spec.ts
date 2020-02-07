@@ -1,13 +1,13 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import element from 'element-ui';
-import FormTable from '../../packages/form-dialog/src/main.vue';
+import FormDialog from '../../packages/form-dialog/src/main.vue';
 // import 'element-ui/lib/theme-chalk/index.css';
 // import axios from 'axios';
 const localVue = createLocalVue();
 localVue.use(element);
 // localVue.axios = axios;
 
-describe('formTable.vue', () => {
+describe('FormDialog.vue', () => {
   const initQueryFilter = {
       work_type: '',
       business_status: '',
@@ -40,21 +40,21 @@ describe('formTable.vue', () => {
         ],
       },
       {
-        label: '生效日期',
         type: 'date',
+        label: '生效日期',
         name: 'datetime',
         limit: 10,
         disabled: false,
         default: [],
       },
       {
-        label: '生效模式',
         type: 'radio',
+        label: '生效模式',
         name: 'effect_mode',
         disabled: false,
         sugMap: [
           { label: '店铺', value: 1 },
-          { label: '商圈', value: 2 }
+          { label: '商圈', value: 2 },
         ],
       },
       {
@@ -65,7 +65,7 @@ describe('formTable.vue', () => {
         disabled: false,
         sugMap: [
           { label: '全北京最大商圈', value: 1 },
-          { label: '占海商圈', value: 2 }
+          { label: '占海商圈', value: 2 },
         ],
       },
       {
@@ -76,13 +76,13 @@ describe('formTable.vue', () => {
         disabled: false,
         sugMap: [
           { label: '全北京最大店铺', value: 1 },
-          { label: '占海店铺', value: 2 }
+          { label: '占海店铺', value: 2 },
         ],
       },
     ];
   let wrapper: any = null;
   beforeAll(() => {
-    wrapper = shallowMount(FormTable, {
+    wrapper = shallowMount(FormDialog, {
       localVue,
       propsData: {
         dialogObj: {
@@ -101,42 +101,21 @@ describe('formTable.vue', () => {
   it('renders props.dialogObj when passed', () => {
     expect(wrapper.props().dialogObj.title).toEqual('保低佣金');
   });
-  // it('renders props.queryFilter when passed', () => {
-  //   expect(wrapper.props().queryFilter.work_type).toBe('');
-  // });
-  // it('renders props.tableLabel when passed', () => {
-  //   expect(wrapper.props().tableLabel[0].prop).toBe('rider_id');
-  // });
-  // it('pageFilter change', (done) => {
-  //   wrapper.vm.$nextTick(() => {
-  //   wrapper.setData({pageFilter: {
-  //     account_status: '2',
-  //     bind_phone: 1,
-  //     currentPage: 1,
-  //     prepage: 10,
-  //     work_type: '110',
-  //   }});
-  //   expect(wrapper.vm.pageFilter.work_type).toBe('110');
-  //   done();
-  //   });
-  // });
-  // it('api error', (done) => {
-  //   wrapper.vm.$nextTick(() => {
-  //       const errorKnight = () => new Promise((resolve, reject) => {
-  //         resolve({
-  //           errno: 1,
-  //           data: {
-  //             total: 1,
-  //             list: [],
-  //           },
-  //         });
-  //       });
-  //       wrapper = shallowMount(FormTable, {
-  //       localVue,
-  //       propsData: {...defaultProps, queryFunc: errorKnight},
-  //     });
-  //       done();
-  //       expect(wrapper.vm.tableData).toEqual([{}]);
-  //   });
+  it('renders props.queryFilter when passed', () => {
+    expect(wrapper.props().queryFilter.work_type).toEqual('');
+  });
+  it('renders props.domFilter when passed', () => {
+    expect(wrapper.props().domFilter[0].name).toEqual('work_type');
+  });
+  it('测试handleClose方法', () => {
+    const stub = jest.fn();
+    wrapper.setMethods({ handleClose: stub});
+    wrapper.vm.handleClose();
+    expect(stub).toBeCalled();
+  });
+  // it('测试close方法', () => {
+  //   expect(wrapper.find('el-button').exists()).toBe(true);
+  //   // wrapper.find('.button-close').trigger('click');
+  //   // expect(wrapper.emitted('beforeClose')).toBeTruthy();
   // });
 });
