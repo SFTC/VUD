@@ -10,16 +10,14 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "allowJs": true,
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "mocha",
-      "chai"
+      "jest"
     ],
     "paths": {
-      "@": [
-        "examples/*"
+      "@/*": [
+        "src/*"
       ]
     },
     "lib": [
@@ -34,9 +32,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx", 
-    "@types/shims-vue.d.ts", 
-    "@types/shims-tsx.d.ts"
+    "tests/**/*.tsx", "@types/shims-vue.d.ts", "@types/shims-tsx.d.ts"
   ],
   "exclude": [
     "node_modules"

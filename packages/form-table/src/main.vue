@@ -89,7 +89,7 @@
       </el-table>
     </section>
     <section page v-if="total">
-			<el-pagination
+		  <el-pagination
 				@current-change="handleCurrentChange"
 				:current-page="currentPage"
 				:page-size="pageSize"
@@ -99,176 +99,136 @@
 		</section>
     </div>
 </template>
-<script>
-export default {
-  name: 'FormTable',
-  componentName: 'FormTable',
-  props: {
-    /**
-     * @param { queryFilter } 接口查询参数
-     */
-    queryFilter: {
-      type: Object,
-      default () {
-        return {}
-      }
-    },
-
-    /**
-     * @param { domFilter } {UI层表单参数}
-     * childrenParam
-     * @param { label }     {名称}
-     * @param { type }      {类型}
-     * @param { name }      {绑定字段名}
-     * @param { limit }     {type为date时所需参数 起末范围}
-     * @param { sugMap }    {type为date时所需参数 下拉字典}
-     */
-    domFilter: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
-
-    /**
-     * @param { tableLabel }  {表格头信息}
-     * childrenParam
-     * @param { minWidth }    {宽度}
-     * @param { label }       {名称}
-     * @param { prop }        {所取字段名}
-     */
-    tableLabel: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
-
-    /**
-     * @param { tableData }   {表格数据}
-     */
-    tableData: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
-    pageSize: {
-      type: Number,
-      default: 10
-    },
-    total: {
-      type: Number,
-      default: 0
-    },
-    /**
-     * @param { tableOperation }   {表格操作栏信息}
-     */
-    tableOperation: {
-      type: Object,
-      default () {
-        return {}
-      }
-    },
-    queryFunc: {
-      type: Function,
-      default () {
-        return () => {}
-      }
-    }
-  },
-  data () {
-    // 初始化data数据
-    const initData = this.init()
-    return {
-      pageFilter: initData.pageFilter,
-      limit: initData.limit,
-      loading: false,
-      currentPage: 1
-    }
-  },
-  methods: {
-    /**
-     * 参数初始化
-     */
-    init () {
-      const pageFilter = {}
-      const limit = {}
-      this.domFilter.forEach(v => {
-        pageFilter[v.name] = v.default || null
-        if (v.limit) {
-          limit[`${v.name}Limit`] = [null, null]
-        }
-      })
-      return { pageFilter, limit }
-    },
-
-    /**
-     * 日期范围限制
-     */
-    disabledDate (date, name, limit) {
-      const today = new Date().getTime()
-      const originTime = date.getTime()
-      if (this['limit'][`${name}Limit`][0] && !this['limit'][`${name}Limit`][1]) {
-        const startTime = new Date(this['limit'][`${name}Limit`][0]).getTime()
-        return originTime > Math.min(today, (startTime + (limit * 24 * 3600 * 1000))) || originTime < startTime - (limit * 24 * 3600 * 1000)
-      }
-      return originTime > today
-    },
-    handlePick ({ maxDate, minDate }, name) {
-      if (maxDate && minDate) {
-        this['pageFilter'][name] = [minDate, maxDate]
-      }
-      this['limit'][`${name}Limit`] = [minDate, maxDate]
-    },
-
-    /**
-     * 列表查询
-     */
-    queryList () {
-      return new Promise((resolve, reject) => {
-        this.loading = true
-        this.$emit('setQueryFilter', { ...this.pageFilter, currentPage: this.currentPage })
-        this.$nextTick(() => {
-          const params = Object.assign(this.queryFilter, {
-            prepage: this.pageSize
-          })
-          this.queryFunc(params)
-          .then(res => {
-            this.loading = false
-            if (res.errno === 0) {
-              const result = res.data
-              this.$emit('callbackDataFormat', result)
-              resolve()
-            } else {
-              reject()
-            }
-          })
-        })
-      })
-    },
-    /**
-     * 翻页
-     */
-    handleCurrentChange (current) {
-      this.currentPage = current
-      this.queryList(this.currentPage)
-    }
-  },
-
-  watch: {
-    // 筛选项深度监听自动查询列表 第一次赋值data时查询列表(页面进来自动查询一次列表)
-    pageFilter: {
-      handler () {
-        this.$emit('setQueryFilter', { ...this.pageFilter, currentPage: this.currentPage })
-      },
-      deep: true
-    }
-  },
-  mounted () {
-    this.handleCurrentChange()
-  }
+<script lang="ts">
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+interface DomFilter {
+  name: string;
+  default?: string;
+  limit?: string;
 }
+@Component({})
+
+export default class FormTable extends Vue {
+  private get pageFilter(): any {
+    return this.init().pageFilter;
+  }
+  private get limit(): any {
+    return this.init().limit;
+  }
+  /**
+   * @param { queryFilter } 接口查询参数
+   */
+  @Prop({default: {}}) public queryFilter!: object;
+
+  /**
+   * @param { domFilter } {UI层表单参数}
+   * childrenParam
+   * @param { label }     {名称}
+   * @param { type }      {类型}
+   * @param { name }      {绑定字段名}
+   * @param { limit }     {type为date时所需参数 起末范围}
+   * @param { sugMap }    {type为date时所需参数 下拉字典}
+   */
+  @Prop({default: []}) public domFilter!: any[];
+
+  /**
+   * @param { tableLabel }  {表格头信息}
+   * childrenParam
+   * @param { minWidth }    {宽度}
+   * @param { label }       {名称}
+   * @param { prop }        {所取字段名}
+   */
+  @Prop({default: []}) public tableLabel!: any[];
+
+  /**
+   * @param { tableData }   {表格数据}
+   */
+  @Prop({default: []}) public tableData!: any[] ;
+  @Prop({default: 10}) public pageSize!: number;
+  @Prop({default: 0}) public total!: number;
+  /**
+   * @param { tableOperation }   {表格操作栏信息}
+   */
+  @Prop({default: {}}) public tableOperation!: object;
+  @Prop({default: () => void 0}) public queryFunc!: any;
+
+  private loading = false;
+  private currentPage = 1;
+  /**
+   * 参数初始化
+   */
+  public init(): {pageFilter: any, limit: any} {
+    const pageFilter: any = {};
+    const limit: any = {};
+    this.domFilter.forEach((v: DomFilter) => {
+      pageFilter[v.name] = v.default || null;
+      if (v.limit) {
+        limit[`${v.name}Limit`] = [null, null];
+      }
+    });
+    return { pageFilter, limit };
+  }
+
+  /**
+   * 日期范围限制
+   */
+  public disabledDate(date: any, name: string, limit: any): boolean {
+    const today = new Date().getTime();
+    const originTime = date.getTime();
+    if (this.limit[`${name}Limit`][0] && !this.limit[`${name}Limit`][1]) {
+      const startTime = new Date(this.limit[`${name}Limit`][0]).getTime();
+      // tslint:disable-next-line:max-line-length
+      return originTime > Math.min(today, (startTime + (limit * 24 * 3600 * 1000))) || originTime < startTime - (limit * 24 * 3600 * 1000);
+    }
+    return originTime > today;
+  }
+  public handlePick( maxDate: any, minDate: any , name: string): void {
+    if (maxDate && minDate) {
+      this.pageFilter[name] = [minDate, maxDate];
+    }
+    this.limit[`${name}Limit`] = [minDate, maxDate];
+  }
+  /**
+   * 列表查询
+   */
+  public queryList(): any {
+    return new Promise((resolve, reject) => {
+      this.loading = true;
+      this.$emit('setQueryFilter', { ...this.pageFilter, currentPage: this.currentPage });
+      this.$nextTick(() => {
+        const params = Object.assign(this.queryFilter, {
+          prepage: this.pageSize,
+        });
+        this.queryFunc && this.queryFunc(params)
+        .then((res: any) => {
+          this.loading = false;
+          if (res.errno === 0) {
+            const result = res.data;
+            this.$emit('callbackDataFormat', result);
+            resolve();
+          } else {
+            reject();
+          }
+        });
+      });
+    });
+  }
+  /**
+   * 翻页
+   */
+  public handleCurrentChange(current: number): void {
+    this.currentPage = current;
+    this.queryList();
+  }
+  private mounted(): void {
+    this.handleCurrentChange(1);
+  }
+  // 筛选项深度监听自动查询列表 第一次赋值data时查询列表(页面进来自动查询一次列表)
+  @Watch('pageFilter', {deep: true})
+  private onPageFilterChange() {
+    this.$emit('setQueryFilter', { ...this.pageFilter, currentPage: this.currentPage });
+  }
+  }
 </script>
 <style lang="less" scoped>
     [wrapper] {

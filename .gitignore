@@ -4,6 +4,8 @@ node_modules
 lib
 /sf-vue-ui
 
+coverage
+
 /tests/e2e/reports/
 selenium-debug.log
 chromedriver.log

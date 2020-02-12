@@ -1,11 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////////////
 // Refer to the entire list of global config settings here:
 // https://github.com/nightwatchjs/nightwatch/blob/master/lib/settings/defaults.js#L16
 //
 // More info on test globals:
 //   https://nightwatchjs.org/gettingstarted/configuration/#test-globals
 //
-///////////////////////////////////////////////////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////////////
 
 module.exports = {
   // this controls whether to abort the test execution when an assertion failed and skip the rest
@@ -20,7 +20,7 @@ module.exports = {
   // expect assertions
   waitForConditionTimeout: 5000,
 
-  'default': {
+  default: {
     /*
     The globals defined here are available everywhere in any test env
     */
@@ -32,7 +32,7 @@ module.exports = {
     */
   },
 
-  'firefox': {
+  firefox: {
     /*
     The globals defined here are available only when the chrome testing env is being used
        i.e. when running with --env firefox
@@ -42,14 +42,14 @@ module.exports = {
      *   return 'Firefox specific global';
      * }
      */
-  },
+  }
 
-  /////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////
   // Global hooks
   // - simple functions which are executed as part of the test run
   // - take a callback argument which can be called when an async
   //    async operation is finished
-  /////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////
   /**
    * executed before the test run has started, so before a session is created
    */
@@ -92,10 +92,10 @@ module.exports = {
   },
   */
 
-  /////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////
   // Global reporter
   //  - define your own custom reporter
-  /////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////
   /*
   reporter(results, cb) {
     cb();
