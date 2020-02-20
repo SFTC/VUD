@@ -146,7 +146,7 @@ html,body{
 
   &.page-container {
     padding: 0;
-    width: 1140px;
+    width: 1440px;
     margin: 0 auto;
   }
 
@@ -185,7 +185,7 @@ html,body{
   }
 
   .content {
-    padding-top: 50px;
+    padding-top: 17px;
 
       h3 {
         margin: 55px 0 20px;
