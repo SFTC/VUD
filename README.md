@@ -14,7 +14,7 @@ VUD 是基于 Element-UI 库进行二次封装的组件库。基于现在部门�
 ## :boom: 使用
 
 ```shell
-npm install vud --save
+npm install vudui --save
 ```
 
 ## License
