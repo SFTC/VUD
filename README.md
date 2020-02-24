@@ -1,4 +1,4 @@
-# :memo: VUD
+# :memo: vudui
 
 ## 介绍
 ![](https://img.shields.io/badge/npm-0.12-orange.svg) ![](https://img.shields.io/github/issues/SFTC/sf-vue-ui.svg) ![](https://img.shields.io/github/forks/SFTC/sf-vue-ui.svg) ![](https://img.shields.io/github/stars/SFTC/sf-vue-ui.svg) ![](https://img.shields.io/github/license/SFTC/sf-vue-ui.svg)
