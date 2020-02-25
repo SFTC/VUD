@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <h2>引入 SFVUEUI</h2>
+    <h2>引入 vudui</h2>
     <div class="example-area">
       <div class="example__info">npm安装</div>
       <markdown content="
@@ -12,9 +12,9 @@
           import axios from 'axios'
           Vue.use(element)
           Vue.axios = axios
-          import SfVUEUI from 'sfvue-ui'
-          // import 'sfvue-ui/lib/sf-vue-ui.css'
-          Vue.use(SfVUEUI)
+          import 'vudui/lib/vudui.css'
+          import vudui from 'vudui'
+          Vue.use(vudui)
 
           Vue.config.productionTip = false
 

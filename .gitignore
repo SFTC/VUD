@@ -2,7 +2,6 @@
 node_modules
 /dist
 lib
-/sf-vue-ui
 
 coverage
 

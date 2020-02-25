@@ -14,7 +14,7 @@ export default {
   name: 'plugin',
   data () {
     return {
-      content: 'npm install sf-vue-ui --save'
+      content: 'npm install vudui --save'
     }
   },
   components: {

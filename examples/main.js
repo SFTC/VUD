@@ -8,8 +8,8 @@ Vue.use(element)
 Vue.axios = axios
 // import SfVUEUI from '../packages/index'
 import 'vudui/lib/vudui.css'
-import SfVUEUI from 'vudui'
-Vue.use(SfVUEUI)
+import vudui from 'vudui'
+Vue.use(vudui)
 
 Vue.config.productionTip = false
 
