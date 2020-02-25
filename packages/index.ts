@@ -26,8 +26,8 @@ const install =  (Vue: any, opts: any) => {
 // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
 export default {
   install,
-  // MultiOption,
-  // MultiSelect,
-  // FormDialog,
+  MultiOption,
+  MultiSelect,
+  FormDialog,
   FormTable,
 };

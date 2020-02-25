@@ -47,17 +47,20 @@
 <script lang="ts">
 
 // import Emitter from '../../utils/emitter';
-import { Component, Prop, Mixins, Watch, Vue } from 'vue-property-decorator';
+import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import Clickoutside from 'element-ui/lib/utils/clickoutside';
 // import Emitter from 'element-ui/lib/mixins/emitter';
 
-function _broadcast(componentName: string, eventName: string, params: any) {
+function _broadcast (componentName: string, eventName: string, params: any) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   this.$children.forEach((child: any) => {
     const name = child.$options.name;
     if (name === componentName) {
+      // eslint-disable-next-line prefer-spread
       child.$emit.apply(child, [eventName].concat(params));
     } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       _broadcast.apply(child, [componentName, eventName].concat([params]));
     }
@@ -66,34 +69,36 @@ function _broadcast(componentName: string, eventName: string, params: any) {
 
 @Component({
   // 必须注明组件名，不然dispatch和brocast都无效
-  directives: { Clickoutside },
+  directives: { Clickoutside }
 })
 export default class MultiSelect extends Vue {
   @Prop({
-    type: Array,
+    type: Array
   })
   public readonly value!: string[];
+
   @Prop({
-    type: String,
+    type: String
   })
   public readonly placeholder: string | undefined;
+
   @Prop({
-    type: Boolean,
+    type: Boolean
   })
   public readonly disabled: boolean | undefined;
 
-  public  ComponentName: string = 'MultiSelect';
+  public ComponentName = 'MultiSelect';
 
-  private isFocus: boolean = false;
-  private isAll: boolean = false;
-  private isEmpty: boolean = false;
-  private isSelecting: boolean = false;
-  private selectWord: string = '';
-  private searchVal: string = '';
-  private matchNum: number = 0;
-  private optionsLength: number = 0;
+  private isFocus = false;
+  private isAll = false;
+  private isEmpty = false;
+  private isSelecting = false;
+  private selectWord = '';
+  private searchVal = '';
+  private matchNum = 0;
+  private optionsLength = 0;
 
-  public dispatch(componentName: string, eventName: string, params: any) {
+  public dispatch (componentName: string, eventName: string, params: any) {
     let parent = this.$parent || this.$root;
     let name = parent.$options.name;
 
@@ -105,15 +110,18 @@ export default class MultiSelect extends Vue {
       }
     }
     if (parent) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
+      // eslint-disable-next-line prefer-spread
       parent.$emit.apply(parent, [eventName].concat(params));
     }
   }
-  public broadcast(componentName: string, eventName: string, params: any) {
+
+  public broadcast (componentName: string, eventName: string, params: any) {
     _broadcast.call(this, componentName, eventName, params);
   }
 
-  public created() {
+  public created () {
     this.$on('selectItem', this.selectItem);
     this.$on('optionsChange', this.optionsChange);
     this.$nextTick(() => {
@@ -143,7 +151,7 @@ export default class MultiSelect extends Vue {
 
 
   @Watch('value')
-  public onValueChanged() {
+  public onValueChanged () {
     this.$nextTick(() => {
       const selectNum = this.value.length;
       this.isAll = this.checkSelectAll();
@@ -166,7 +174,7 @@ export default class MultiSelect extends Vue {
     });
   }
 
-  public checkSelectAll() {
+  public checkSelectAll () {
     if (this.$children.length !== this.optionsLength) {
       this.optionsLength = this.$children.length;
     }
@@ -175,7 +183,7 @@ export default class MultiSelect extends Vue {
     return selectNum === this.optionsLength && selectNum !== 0;
   }
 
-  public getwords() {
+  public getwords () {
     const selectNum = this.value.length;
     let words;
 
@@ -194,7 +202,7 @@ export default class MultiSelect extends Vue {
     return words;
   }
 
-  public traverseAndGetName(val: string) {
+  public traverseAndGetName (val: string) {
     const options: any = this.$children;
 
     // tslint:disable-next-line:prefer-for-of
@@ -207,7 +215,7 @@ export default class MultiSelect extends Vue {
     return '';
   }
 
-  public optionsChange() {
+  public optionsChange () {
     this.$nextTick(() => {
       const length = this.$children.length;
       if (length === this.optionsLength) { return; }
@@ -215,7 +223,7 @@ export default class MultiSelect extends Vue {
     });
   }
 
-  public handleClick() {
+  public handleClick () {
     if (this.disabled) {
       return;
     }
@@ -229,12 +237,12 @@ export default class MultiSelect extends Vue {
     this.isFocus = !this.isFocus;
   }
 
-  public handleOut() {
+  public handleOut () {
     this.isFocus = false;
     this.isEmpty = false;
   }
 
-  public handleSearch(e: any) {
+  public handleSearch (e: any) {
     const val = e.target.value;
     const len = this.optionsLength;
     const regExp = new RegExp(val, '');
@@ -259,7 +267,7 @@ export default class MultiSelect extends Vue {
     this.matchNum = 0;
   }
 
-  public selectItem(item: any) {
+  public selectItem (item: any) {
     const value = this.value.slice();
     const index = value.indexOf(item.value);
 
@@ -273,7 +281,7 @@ export default class MultiSelect extends Vue {
     this.$emit('input', value);
   }
 
-  public selectAll() {
+  public selectAll () {
     const value: any[] = [];
     this.isAll = !this.isAll;
 
@@ -285,7 +293,6 @@ export default class MultiSelect extends Vue {
 
     this.$emit('input', value);
   }
-
 }
 </script>
 

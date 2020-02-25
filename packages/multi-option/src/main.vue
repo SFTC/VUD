@@ -10,25 +10,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 // import Emitter from '../../utils/emitter';
 // import Emitter from 'element-ui/lib/mixins/emitter';
 
 @Component
 export default class MultiOption extends Vue {
   @Prop({
-    type: [String, Number],
+    type: [String, Number]
   })
   public readonly value: string | number | undefined;
+
   @Prop({
-    type: [String, Number],
+    type: [String, Number]
   })
   public readonly label: string | number | undefined;
-  public componentName: string = 'MultiOption';
 
-  private selected: boolean = false;
-  private hide: boolean = false;
-  public dispatch(componentName: string, eventName: string, params?: any) {
+  public componentName = 'MultiOption';
+
+  private selected = false;
+  private hide = false;
+  public dispatch (componentName: string, eventName: string, params?: any) {
     let parent = this.$parent || this.$root;
     let name = parent.$options.name;
 
@@ -40,36 +42,38 @@ export default class MultiOption extends Vue {
       }
     }
     if (parent) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
+      // eslint-disable-next-line prefer-spread
       parent.$emit.apply(parent, [eventName].concat(params));
     }
   }
-  public handleInitSelect(bool: boolean) {
+
+  public handleInitSelect (bool: boolean) {
     this.selected = bool;
   }
 
-  public handleClick() {
+  public handleClick () {
     this.selected = !this.selected;
     this.dispatch('MultiSelect', 'selectItem', this);
   }
 
-  public handleUpdate(val: any) {
+  public handleUpdate (val: any) {
     if (val === this.value) {
       this.selected = true;
     }
   }
 
-  public created() {
+  public created () {
     this.componentName = 'MultiOption';
     this.$on('initSelected', this.handleInitSelect);
     this.$on('updateSelected', this.handleUpdate);
     this.dispatch('MultiSelect', 'optionsChange');
   }
 
-  public beforeDestroy() {
+  public beforeDestroy () {
     this.dispatch('MultiSelect', 'optionsChange');
   }
-
 }
 </script>
 

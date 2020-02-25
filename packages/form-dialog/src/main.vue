@@ -87,18 +87,19 @@ interface DomFilter {
 
 @Component({})
 
-export default class FormDialog extends Vue  {
-  private get limit(): any {
+export default class FormDialog extends Vue {
+  private get limit (): any {
     return this.init().limit;
   }
+
   /**
    * @param { queryFilter } 接口查询参数
    */
-  @Prop({default: {title: '', visible: false}}) public dialogObj!: Dialog;
+  @Prop({ default: { title: '', visible: false } }) public dialogObj!: Dialog;
   /**
    * @param { queryFilter } 接口查询参数
    */
-  @Prop({default: {}}) public queryFilter!: any;
+  @Prop({ default: {} }) public queryFilter!: any;
 
   /**
    * @param { domFilter } {UI层表单参数}
@@ -109,17 +110,18 @@ export default class FormDialog extends Vue  {
    * @param { limit }     {type为date时所需参数 起末范围}
    * @param { sugMap }    {type为date时所需参数 下拉字典}
    */
-  @Prop({default: []}) public domFilter!: any[];
-  @Prop({default: () => void 0}) public handleChange: any;
+  @Prop({ default: [] }) public domFilter!: any[];
+  // eslint-disable-next-line no-void
+  @Prop({ default: () => void 0 }) public handleChange: any;
   // 初始化data数据
 
-  private  loading = false;
-  private  currentPage = 1;
+  private loading = false;
+  private currentPage = 1;
 
   /**
    * 参数初始化
    */
-  public init(): {limit: any} {
+  public init (): {limit: any} {
     const limit: any = {};
     this.domFilter.forEach((v: DomFilter) => {
       if (v.limit) {
@@ -132,7 +134,7 @@ export default class FormDialog extends Vue  {
   /**
    * 日期范围限制
    */
-  public disabledDate(date: any, name: string, limit: any): boolean {
+  public disabledDate (date: any, name: string, limit: any): boolean {
     const today = new Date().getTime();
     const originTime = date.getTime();
     if (this.limit[`${name}Limit`][0] && !this.limit[`${name}Limit`][1]) {
@@ -142,19 +144,23 @@ export default class FormDialog extends Vue  {
     }
     return originTime > today;
   }
-  public handlePick( maxDate: any, minDate: any , name: string): void {
+
+  public handlePick (maxDate: any, minDate: any, name: string): void {
     if (maxDate && minDate) {
       this.queryFilter[name] = [minDate, maxDate];
     }
     this.limit[`${name}Limit`] = [minDate, maxDate];
   }
-  public handleClose(): void {
+
+  public handleClose (): void {
     this.$emit('beforeClose', this.queryFilter);
   }
-  public submit(): void {
+
+  public submit (): void {
     this.$emit('beforeClose', this.queryFilter, 'submit');
   }
-  public close(): void {
+
+  public close (): void {
     this.$emit('beforeClose', this.queryFilter, 'close');
   }
 }

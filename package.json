@@ -1,7 +1,16 @@
 {
   "name": "vudui",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "description": "基于elementui二次开发的组件",
+  "module": "lib/vudui.common.js",
   "private": false,
+  "keywords": [
+    "vue",
+    "component"
+  ],
+  "author": "0undefined0",
+  "license": "MIT",
+  "repository": "SFTC/VUD",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -48,7 +57,8 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "typescript": "~3.7.5",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vudui": "^0.1.2"
   },
   "eslintConfig": {
     "root": true,
@@ -64,10 +74,18 @@
       "ecmaVersion": 2020
     },
     "rules": {
-      "semi": [0],
-      "quote-props": [0],
-      "no-multiple-empty-lines": [0],
-      "no-tabs": [0]
+      "semi": [
+        0
+      ],
+      "quote-props": [
+        0
+      ],
+      "no-multiple-empty-lines": [
+        0
+      ],
+      "no-tabs": [
+        0
+      ]
     },
     "overrides": [
       {
