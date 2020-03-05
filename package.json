@@ -1,8 +1,8 @@
 {
   "name": "vudui",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "基于elementui二次开发的组件",
-  "module": "lib/vudui.common.js",
+  "module": "lib/index.js",
   "private": false,
   "keywords": [
     "vue",
@@ -93,7 +93,8 @@
       ],
       "no-useless-escape": [
         0
-      ]
+      ],
+      "@typescript-eslint/rule-name": "off"
     },
     "overrides": [
       {

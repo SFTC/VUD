@@ -49,12 +49,14 @@
 // import Emitter from '../../utils/emitter';
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import Clickoutside from 'element-ui/lib/utils/clickoutside';
-import { toCamel, toCapital} from '../../../utils/index'
+import { toCamel, toCapital } from '../../../utils/index'
 // import Emitter from 'element-ui/lib/mixins/emitter';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function _broadcast (componentName: string, eventName: string, params: any) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   this.$children.forEach((child: any) => {
     const { _componentTag } = child.$options;
     if (toCapital(toCamel(_componentTag)) === componentName) {
@@ -100,6 +102,7 @@ export default class MultiSelect extends Vue {
   private matchNum = 0;
   private optionsLength = 0;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public dispatch (componentName: string, eventName: string, params: any) {
     let parent = this.$parent || this.$root;
     let name = parent.$options.name;
@@ -119,6 +122,7 @@ export default class MultiSelect extends Vue {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public broadcast (componentName: string, eventName: string, params: any) {
     _broadcast.call(this, componentName, eventName, params);
   }
@@ -142,6 +146,7 @@ export default class MultiSelect extends Vue {
     if (this.isAll) {
       const value = this.value.slice();
       this.$nextTick(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.$children.forEach((item: any) => {
           value.push(item.value);
         });
@@ -204,6 +209,7 @@ export default class MultiSelect extends Vue {
   }
 
   public traverseAndGetName (val: string) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const options: any = this.$children;
 
     // tslint:disable-next-line:prefer-for-of
@@ -230,6 +236,7 @@ export default class MultiSelect extends Vue {
     }
 
     if (this.isFocus) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (this.$refs.input as any).blur();
       this.handleOut();
       return;
@@ -243,6 +250,7 @@ export default class MultiSelect extends Vue {
     this.isEmpty = false;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public handleSearch (e: any) {
     const val = e.target.value;
     const len = this.optionsLength;
@@ -250,6 +258,7 @@ export default class MultiSelect extends Vue {
     this.searchVal = val;
 
     for (let i = 0; i < len; i++) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const item: any = this.$children[i];
       const match = regExp.test(item.label);
 
@@ -268,6 +277,7 @@ export default class MultiSelect extends Vue {
     this.matchNum = 0;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public selectItem (item: any) {
     const value = this.value.slice();
     const index = value.indexOf(item.value);
@@ -283,10 +293,12 @@ export default class MultiSelect extends Vue {
   }
 
   public selectAll () {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const value: any[] = [];
     this.isAll = !this.isAll;
 
     if (this.isAll) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.$children.forEach((item: any) => {
         value.push(item.value);
       });

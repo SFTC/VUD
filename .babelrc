@@ -4,6 +4,7 @@
       "component",
       {
         "libraryName": "vudui",
+         "camel2Dash": false, // 是否把驼峰转换成xx-xx的写法
         "style": false
         // "styleLibraryName": "theme"
       }
