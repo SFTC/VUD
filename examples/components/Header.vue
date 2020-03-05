@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <img class="img-icon" src="https://img.yzcdn.cn/public_files/2017/12/18/fd78cf6bb5d12e2a119d0576bedfd230.png" alt="">
+      <img class="img-icon" src="../assets/vud.png" alt="">
       <span>VUD</span>
       <div class="input-container"><input type="text" placeholder="搜索组件..."><i></i></div>
       <a href="https://github.com/SFTC/VUD"></a>

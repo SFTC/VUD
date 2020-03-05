@@ -1,6 +1,7 @@
 const path = require('path')
+const buildConfig = require('./build/config.build')
 
-module.exports = {
+module.exports = process.env.VUE_APP_CURRENTMODE === 'part' ? buildConfig : {
   pages: {
     index: {
       // page 的入口
@@ -11,6 +12,7 @@ module.exports = {
       filename: 'index.html'
     }
   },
+  publicPath: process.env.NODE_ENV === 'development' ? './' : '/VUD',
   chainWebpack: config => {
     config.module
       .rule('js')

@@ -1,3 +1,4 @@
 # 注释，忽略文件
 node_modules
 examples
+lib

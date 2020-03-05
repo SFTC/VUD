@@ -7,17 +7,17 @@ const components = [
   MultiSelect,
   MultiOption,
   FormTable,
-  FormDialog,
+  FormDialog
 ];
 const componentsName: string[] = [
   'MultiSelect',
   'MultiOption',
   'FormTable',
-  'FormDialog',
+  'FormDialog'
 ];
 
 // 如果使用 use 注册插件，则所有的组件都将被注册
-const install =  (Vue: any, opts: any) => {
+const install = (Vue: any) => {
   components.map((component: any, i) => {
     Vue.component(componentsName[i], component);
   });
@@ -29,5 +29,5 @@ export default {
   MultiOption,
   MultiSelect,
   FormDialog,
-  FormTable,
+  FormTable
 };

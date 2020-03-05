@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "vudui",
+        "style": false
+        // "styleLibraryName": "theme"
+      }
+    ]
+  ]
+}

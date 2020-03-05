@@ -50,6 +50,7 @@ export default class MultiOption extends Vue {
   }
 
   public handleInitSelect (bool: boolean) {
+    console.log(bool)
     this.selected = bool;
   }
 

@@ -156,7 +156,7 @@ export default class MultiSelect extends Vue {
       const selectNum = this.value.length;
       this.isAll = this.checkSelectAll();
       this.selectWord = this.getwords();
-
+      console.log(this.isAll)
       if (selectNum === 0) {
         this.broadcast('MultiOption', 'initSelected', false);
       } else if (selectNum === this.optionsLength) {
