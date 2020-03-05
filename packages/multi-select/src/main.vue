@@ -49,14 +49,15 @@
 // import Emitter from '../../utils/emitter';
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import Clickoutside from 'element-ui/lib/utils/clickoutside';
+import { toCamel, toCapital} from '../../../utils/index'
 // import Emitter from 'element-ui/lib/mixins/emitter';
 
 function _broadcast (componentName: string, eventName: string, params: any) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   this.$children.forEach((child: any) => {
-    const name = child.$options.name;
-    if (name === componentName) {
+    const { _componentTag } = child.$options;
+    if (toCapital(toCamel(_componentTag)) === componentName) {
       // eslint-disable-next-line prefer-spread
       child.$emit.apply(child, [eventName].concat(params));
     } else {
@@ -88,6 +89,7 @@ export default class MultiSelect extends Vue {
   public readonly disabled: boolean | undefined;
 
   public ComponentName = 'MultiSelect';
+  public name = 'MultiSelect';
 
   private isFocus = false;
   private isAll = false;
@@ -156,7 +158,6 @@ export default class MultiSelect extends Vue {
       const selectNum = this.value.length;
       this.isAll = this.checkSelectAll();
       this.selectWord = this.getwords();
-      console.log(this.isAll)
       if (selectNum === 0) {
         this.broadcast('MultiOption', 'initSelected', false);
       } else if (selectNum === this.optionsLength) {

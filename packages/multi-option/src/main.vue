@@ -13,6 +13,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 // import Emitter from '../../utils/emitter';
 // import Emitter from 'element-ui/lib/mixins/emitter';
+import { toCamel, toCapital} from '../../../utils/index'
 
 @Component
 export default class MultiOption extends Vue {
@@ -26,19 +27,19 @@ export default class MultiOption extends Vue {
   })
   public readonly label: string | number | undefined;
 
-  public componentName = 'MultiOption';
+  public ComponentName = 'MultiOption';
+  public name = 'MultiOption';
 
   private selected = false;
   private hide = false;
   public dispatch (componentName: string, eventName: string, params?: any) {
     let parent = this.$parent || this.$root;
-    let name = parent.$options.name;
+    let name = toCapital(toCamel((parent.$options as any)._componentTag))
 
     while (parent && (!name || name !== componentName)) {
       parent = parent.$parent;
-
       if (parent) {
-        name = parent.$options.name;
+        name = toCapital(toCamel((parent.$options as any)._componentTag))
       }
     }
     if (parent) {
@@ -50,7 +51,6 @@ export default class MultiOption extends Vue {
   }
 
   public handleInitSelect (bool: boolean) {
-    console.log(bool)
     this.selected = bool;
   }
 
@@ -66,7 +66,7 @@ export default class MultiOption extends Vue {
   }
 
   public created () {
-    this.componentName = 'MultiOption';
+    this.ComponentName = 'MultiOption';
     this.$on('initSelected', this.handleInitSelect);
     this.$on('updateSelected', this.handleUpdate);
     this.dispatch('MultiSelect', 'optionsChange');

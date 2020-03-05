@@ -7,7 +7,7 @@ import axios from 'axios'
 Vue.use(element)
 Vue.axios = axios
 import vudui from '../packages/index'
-import 'vudui/lib/css/index.css'
+import '../lib/css/index.css'
 // import vudui from '../lib/index' // 按需加载的全部
 // import vudui from '../lib/vudui.common' //整体输出的
 // import vudui from 'vudui'
