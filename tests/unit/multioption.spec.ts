@@ -7,7 +7,7 @@ describe('multiOption.vue', () => {
   const label = '黄金糕';
   beforeEach(() => {
     wrapper = shallowMount(multiOption, {
-      propsData: { value, label },
+      propsData: { value, label }
     });
   });
   it('测试props', () => {

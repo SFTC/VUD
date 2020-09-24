@@ -13,7 +13,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 // import Emitter from '../../utils/emitter';
 // import Emitter from 'element-ui/lib/mixins/emitter';
-import { toCamel, toCapital} from '../../../utils/index'
+import { toCamel, toCapital } from '../../../utils/index'
 
 @Component
 export default class MultiOption extends Vue {

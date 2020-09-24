@@ -5,35 +5,40 @@ import QuickStart from './pages/QuickStart'
 import FormTable from './pages/FormTable'
 import MultiSelect from './pages/MultiSelect'
 import FormDialog from './pages/FormDialog'
+import VirtualSelect from "./pages/VirtualSelect";
 
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     {
-      path: '/',
+      path: "/",
       component: InstallAtion
     },
     {
-      path: '/installation',
+      path: "/installation",
       component: InstallAtion
     },
     {
-      path: '/quickstart',
+      path: "/quickstart",
       component: QuickStart
     },
     {
-      path: '/formtable',
+      path: "/formtable",
       component: FormTable
     },
     {
-      path: '/multiselect',
+      path: "/multiselect",
       component: MultiSelect
     },
     {
-      path: '/formdialog',
+      path: "/virtualselect",
+      component: VirtualSelect
+    },
+    {
+      path: "/formdialog",
       component: FormDialog
     }
   ]
-})
+});
 export default router

@@ -13,18 +13,18 @@ describe('formTable.vue', () => {
       errno: 0,
       data: {
         total: 0,
-        list: [{}],
-      },
+        list: [{}]
+      }
     });
   });
   const defaultProps = {
     queryFilter: {
       work_type: '',
-      account_status: '',
-    },      // 列表接口参数
+      account_status: ''
+    }, // 列表接口参数
     domFilter: [
       {
-        name: 'work_type',               // 下拉框sugMap参数Array转换为 [{key: 'key', value: 'value'}]  Object转换为 {key: value}
+        name: 'work_type', // 下拉框sugMap参数Array转换为 [{key: 'key', value: 'value'}]  Object转换为 {key: value}
         label: '骑士类型',
         type: 'select',
         sugMap: [
@@ -33,8 +33,8 @@ describe('formTable.vue', () => {
           { label: '同城非全日制专职骑士', value: 101 },
           { label: '供应商骑士', value: 110 },
           { label: '社会兼职骑士', value: 201 },
-          { label: '兼职供应商骑士', value: 202 },
-        ],
+          { label: '兼职供应商骑士', value: 202 }
+        ]
       },
       {
         name: 'account_status',
@@ -42,33 +42,33 @@ describe('formTable.vue', () => {
         type: 'select',
         sugMap: [
           { label: '在职', value: 1 },
-          { label: '离职', value: 2 },
-        ],
+          { label: '离职', value: 2 }
+        ]
       },
       {
         label: '电话号码',
         type: 'input',
-        name: 'phone',
-      },
+        name: 'phone'
+      }
     ],
     tableLabel: [
       {
         minWidth: 160,
         label: '骑士ID',
-        prop: 'rider_id',
+        prop: 'rider_id'
       }, {
         minWidth: 160,
         label: '同城ID',
-        prop: 'ucode',
+        prop: 'ucode'
       }, {
         minWidth: 160,
         label: '姓名',
-        prop: 'chinesename',
+        prop: 'chinesename'
       }, {
         minWidth: 160,
         label: '电话',
-        prop: 'bind_phone',
-      },
+        prop: 'bind_phone'
+      }
     ],
     tableData: [{}],
     total: 0,
@@ -79,22 +79,22 @@ describe('formTable.vue', () => {
         {
           type: 'primary',
           label: '查看',
-          func: () => void 0,
+          func: () => void 0
         },
         {
           type: 'primary',
           label: '审核',
-          func: () => void 0,
-        },
-      ],
+          func: () => void 0
+        }
+      ]
     },
-    queryFunc: searchKnight,
+    queryFunc: searchKnight
   };
   let wrapper: any = null;
   beforeAll(() => {
     wrapper = shallowMount(FormTable, {
       localVue,
-      propsData: defaultProps ,
+      propsData: defaultProps
     });
   });
   // let wrapper = shallowMount(FormTable, {
@@ -112,34 +112,36 @@ describe('formTable.vue', () => {
   });
   it('pageFilter change', (done) => {
     wrapper.vm.$nextTick(() => {
-    wrapper.setData({pageFilter: {
-      account_status: '2',
-      bind_phone: 1,
-      currentPage: 1,
-      prepage: 10,
-      work_type: '110',
-    }});
-    expect(wrapper.vm.pageFilter.work_type).toBe('110');
-    done();
+      wrapper.setData({
+        pageFilter: {
+          account_status: '2',
+          bind_phone: 1,
+          currentPage: 1,
+          prepage: 10,
+          work_type: '110'
+        }
+      });
+      expect(wrapper.vm.pageFilter.work_type).toBe('110');
+      done();
     });
   });
   it('api error', (done) => {
     wrapper.vm.$nextTick(() => {
-        const errorKnight = () => new Promise((resolve, reject) => {
-          resolve({
-            errno: 1,
-            data: {
-              total: 1,
-              list: [],
-            },
-          });
+      const errorKnight = () => new Promise((resolve, reject) => {
+        resolve({
+          errno: 1,
+          data: {
+            total: 1,
+            list: []
+          }
         });
-        wrapper = shallowMount(FormTable, {
-        localVue,
-        propsData: {...defaultProps, queryFunc: errorKnight},
       });
-        done();
-        expect(wrapper.vm.tableData).toEqual([{}]);
+      wrapper = shallowMount(FormTable, {
+        localVue,
+        propsData: { ...defaultProps, queryFunc: errorKnight }
+      });
+      done();
+      expect(wrapper.vm.tableData).toEqual([{}]);
     });
   });
 });

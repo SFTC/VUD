@@ -9,77 +9,77 @@ localVue.use(element);
 
 describe('FormDialog.vue', () => {
   const initQueryFilter = {
-      work_type: '',
-      business_status: '',
-      datetime: '',
-      effect_mode: '',
-    };
+    work_type: '',
+    business_status: '',
+    datetime: '',
+    effect_mode: ''
+  };
   const intDomFilter = [
-      {
-        name: 'work_type',               // 下拉框sugMap参数Array转换为 [{key: 'key', value: 'value'}]  Object转换为 {key: value}
-        label: '骑士类型',
-        type: 'select',
-        disabled: false,
-        sugMap: [
-          { label: '同城全日制专职骑士', value: 100 },
-          { label: '同城兼职骑士', value: 200 },
-          { label: '同城非全日制专职骑士', value: 101 },
-          { label: '供应商骑士', value: 110 },
-          { label: '社会兼职骑士', value: 201 },
-          { label: '兼职供应商骑士', value: 202 },
-        ],
-      },
-      {
-        name: 'business_status',
-        label: '业务类型',
-        type: 'select',
-        disabled: false,
-        sugMap: [
-          { label: '即可送', value: 1 },
-          { label: '急送', value: 2 },
-        ],
-      },
-      {
-        type: 'date',
-        label: '生效日期',
-        name: 'datetime',
-        limit: 10,
-        disabled: false,
-        default: [],
-      },
-      {
-        type: 'radio',
-        label: '生效模式',
-        name: 'effect_mode',
-        disabled: false,
-        sugMap: [
-          { label: '店铺', value: 1 },
-          { label: '商圈', value: 2 },
-        ],
-      },
-      {
-        name: 'aoi',
-        label: '商圈',
-        type: 'select',
-        show: true,
-        disabled: false,
-        sugMap: [
-          { label: '全北京最大商圈', value: 1 },
-          { label: '占海商圈', value: 2 },
-        ],
-      },
-      {
-        name: 'shop',
-        label: '店铺',
-        type: 'select',
-        show: true,
-        disabled: false,
-        sugMap: [
-          { label: '全北京最大店铺', value: 1 },
-          { label: '占海店铺', value: 2 },
-        ],
-      },
-    ];
+    {
+      name: 'work_type', // 下拉框sugMap参数Array转换为 [{key: 'key', value: 'value'}]  Object转换为 {key: value}
+      label: '骑士类型',
+      type: 'select',
+      disabled: false,
+      sugMap: [
+        { label: '同城全日制专职骑士', value: 100 },
+        { label: '同城兼职骑士', value: 200 },
+        { label: '同城非全日制专职骑士', value: 101 },
+        { label: '供应商骑士', value: 110 },
+        { label: '社会兼职骑士', value: 201 },
+        { label: '兼职供应商骑士', value: 202 }
+      ]
+    },
+    {
+      name: 'business_status',
+      label: '业务类型',
+      type: 'select',
+      disabled: false,
+      sugMap: [
+        { label: '即可送', value: 1 },
+        { label: '急送', value: 2 }
+      ]
+    },
+    {
+      type: 'date',
+      label: '生效日期',
+      name: 'datetime',
+      limit: 10,
+      disabled: false,
+      default: []
+    },
+    {
+      type: 'radio',
+      label: '生效模式',
+      name: 'effect_mode',
+      disabled: false,
+      sugMap: [
+        { label: '店铺', value: 1 },
+        { label: '商圈', value: 2 }
+      ]
+    },
+    {
+      name: 'aoi',
+      label: '商圈',
+      type: 'select',
+      show: true,
+      disabled: false,
+      sugMap: [
+        { label: '全北京最大商圈', value: 1 },
+        { label: '占海商圈', value: 2 }
+      ]
+    },
+    {
+      name: 'shop',
+      label: '店铺',
+      type: 'select',
+      show: true,
+      disabled: false,
+      sugMap: [
+        { label: '全北京最大店铺', value: 1 },
+        { label: '占海店铺', value: 2 }
+      ]
+    }
+  ];
   let wrapper: any = null;
   beforeAll(() => {
     wrapper = shallowMount(FormDialog, {
@@ -87,11 +87,11 @@ describe('FormDialog.vue', () => {
       propsData: {
         dialogObj: {
           title: '保低佣金',
-          visible: false,
+          visible: false
         },
-        queryFilter: JSON.parse(JSON.stringify(initQueryFilter)),      // 列表接口参数
-        domFilter: JSON.parse(JSON.stringify(intDomFilter)),
-      } ,
+        queryFilter: JSON.parse(JSON.stringify(initQueryFilter)), // 列表接口参数
+        domFilter: JSON.parse(JSON.stringify(intDomFilter))
+      }
     });
   });
   // let wrapper = shallowMount(FormTable, {
@@ -109,7 +109,7 @@ describe('FormDialog.vue', () => {
   });
   it('测试handleClose方法', () => {
     const stub = jest.fn();
-    wrapper.setMethods({ handleClose: stub});
+    wrapper.setMethods({ handleClose: stub });
     wrapper.vm.handleClose();
     expect(stub).toBeCalled();
   });

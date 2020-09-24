@@ -34,6 +34,10 @@
           {
             "path": "/formdialog",
             "title": "表单"
+          },
+          {
+            "path": "/virtualselect",
+            "title": "虚拟滚动"
           }
         ]
       }   

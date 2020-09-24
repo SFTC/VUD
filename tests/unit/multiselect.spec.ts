@@ -12,22 +12,22 @@ describe('multiSelect.vue', () => {
   let multiOptionTemplate: any;
   it('是否存在multiOption', () => {
     multiOptionTemplate = {
-      render(h: any) {
-        return h(multiOption, { props: { value, label }  });
-      },
+      render (h: any) {
+        return h(multiOption, { props: { value, label } });
+      }
     };
     wrapper = shallowMount(multiSelect, {
       propsData: { placeholder, vModel },
       slots: {
-        default: multiOptionTemplate,
-      },
+        default: multiOptionTemplate
+      }
     });
     expect(wrapper.find(multiOption).exists()).toBe(true);
     wrapper.destroy();
   });
   it('测试props', () => {
     wrapper = shallowMount(multiSelect, {
-      propsData: { placeholder, vModel, disabled },
+      propsData: { placeholder, vModel, disabled }
     });
     const vm = wrapper.vm;
     const input: any = vm.$el.querySelector('input');
@@ -37,15 +37,15 @@ describe('multiSelect.vue', () => {
   });
   it('测试data', () => {
     multiOptionTemplate = {
-      render(h: any) {
-        return h(multiOption, { props: { value, label }  });
-      },
+      render (h: any) {
+        return h(multiOption, { props: { value, label } });
+      }
     };
     wrapper = shallowMount(multiSelect, {
       propsData: { placeholder, vModel },
       slots: {
-        default: multiOptionTemplate,
-      },
+        default: multiOptionTemplate
+      }
     });
     expect(wrapper.vm.$data.isFocus).toEqual(false);
     expect(wrapper.vm.$data.isAll).toEqual(false);
@@ -59,16 +59,16 @@ describe('multiSelect.vue', () => {
   });
   it('测试方法', async () => {
     multiOptionTemplate = {
-      render(h: any) {
-        return h(multiOption, { props: { value, label }  });
-      },
+      render (h: any) {
+        return h(multiOption, { props: { value, label } });
+      }
     };
     vModel = ['选项1'];
     wrapper = shallowMount(multiSelect, {
       propsData: { placeholder, vModel },
       slots: {
-        default: multiOptionTemplate,
-      },
+        default: multiOptionTemplate
+      }
     });
     // const checkSelectAll = await (wrapper.vm as any).checkSelectAll();
     // tslint:disable-next-line: no-console
@@ -84,16 +84,16 @@ describe('multiSelect.vue', () => {
   });
   it('测试事件', () => {
     multiOptionTemplate = {
-      render(h: any) {
-        return h(multiOption, { props: { value, label }  });
-      },
+      render (h: any) {
+        return h(multiOption, { props: { value, label } });
+      }
     };
     // vModel = ['选项1'];
     wrapper = shallowMount(multiSelect, {
       propsData: { placeholder, vModel },
       slots: {
-        default: multiOptionTemplate,
-      },
+        default: multiOptionTemplate
+      }
     });
     const stub = jest.fn(); // 伪造一个jest的mock funciton
     wrapper.setMethods({ selectAll: stub }); // setMethods将selectAll这个方法覆写
@@ -103,15 +103,15 @@ describe('multiSelect.vue', () => {
   });
   it('测试watch', () => {
     multiOptionTemplate = {
-      render(h: any) {
-        return h(multiOption, { props: { value, label }  });
-      },
+      render (h: any) {
+        return h(multiOption, { props: { value, label } });
+      }
     };
     wrapper = shallowMount(multiSelect, {
       propsData: { placeholder, vModel },
       slots: {
-        default: multiOptionTemplate,
-      },
+        default: multiOptionTemplate
+      }
     });
     // const spy = jest.spyOn(console, 'log');
     // 手动将变量的值设置为false,默认值是true

@@ -1,6 +1,6 @@
 {
   "name": "vudui",
-  "version": "0.1.6",
+  "version": "1.0.1",
   "description": "基于elementui二次开发的组件",
   "module": "lib/index.js",
   "private": false,
@@ -34,7 +34,8 @@
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",
     "vue-property-decorator": "^8.3.0",
-    "vue-router": "^3.1.5"
+    "vue-router": "^3.1.5",
+    "vue-virtual-scroller": "^1.0.10"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",
@@ -94,7 +95,11 @@
       "no-useless-escape": [
         0
       ],
-      "@typescript-eslint/rule-name": "off"
+      "@typescript-eslint/rule-name": "off",
+      "@typescript-eslint/camelcase": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "no-void": "off"
     },
     "overrides": [
       {

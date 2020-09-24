@@ -5,3 +5,5 @@ declare module '*.vue' {
 
 declare module 'element-ui/lib/utils/clickoutside';
 declare module 'element-ui/lib/mixins/emitter';
+// declare module 'vue-virtual-scroller';
+// declare module "Select";
