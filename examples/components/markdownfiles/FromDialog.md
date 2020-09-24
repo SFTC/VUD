@@ -14,6 +14,9 @@
     </form-dialog>
   </div>
 </template>
+```
+
+```javascript
 <script>
 export default {
   name: 'formd',

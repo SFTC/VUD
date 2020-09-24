@@ -12,8 +12,8 @@
           import axios from 'axios'
           Vue.use(element)
           Vue.axios = axios
-          import 'vudui/lib/vudui.css'
           import vudui from 'vudui'
+          import 'vudui/lib/css/index.css'
           Vue.use(vudui)
 
           Vue.config.productionTip = false

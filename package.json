@@ -63,7 +63,7 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "typescript": "~3.7.5",
-    "vudui": "^0.1.2",
+    "vudui": "^1.0.1",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

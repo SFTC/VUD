@@ -7,10 +7,11 @@ import axios from 'axios'
 Vue.use(element)
 Vue.axios = axios
 // import vudui from '../packages/index'
-import '../lib/css/index.css'
-import vudui from '../lib/index' // 按需加载的全部
-// import vudui from '../lib/vudui.common' //整体输出的
-// import vudui from 'vudui'
+// 按需加载的全部
+// import '../lib/css/index.css'
+// import vudui from '../lib/index' 
+import vudui from 'vudui'
+import  "vudui/lib/css/index.css"; //整体输出的
 Vue.use(vudui)
 // import {
 //   MultiSelect,

@@ -34,14 +34,13 @@
     </form-table>
   </div>
 </template>
+```
 
+```javascript
 <script>
 import { searchKnight } from '../api'
 export default {
   name: 'formt',
-  components: {
-    // LogisticsSupplierStationCascade
-  },
   data() {
    const accountStatus = {
       1: '在职',
@@ -97,20 +96,20 @@ export default {
           type: 'input',
           name: 'phone',  
         }, 
-        // {
-        //   label: '下拉',
-        //   type: 'select',
-        //   sugMap: {
-        //     'key': 'value'
-        //   },
-        // }, 
-        // {
-        //   label: '日期',
-        //   type: 'date',
-        //   name: 'b',
-        //   limit: 10,        // 期末范围控制
-        //   default: []       // 默认时间
-        // },
+        {
+          label: '下拉',
+          type: 'select',
+          sugMap: {
+            'key': 'value'
+          },
+        }, 
+        {
+          label: '日期',
+          type: 'date',
+          name: 'b',
+          limit: 10,        // 期末范围控制
+          default: []       // 默认时间
+        },
       ],
       queryFunc: searchKnight,  // 列表查询方法
       tableLabel: [

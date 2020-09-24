@@ -11,7 +11,9 @@
     </multi-select>
   </div>
 </template>
+```
 
+```javascript
 <script>
 
 export default {
