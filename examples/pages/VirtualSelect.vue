@@ -2,7 +2,7 @@
   <div>
     <div class="example-area">
       <div class="example__info">基础(10w条数据)</div>
-      <virtual-select v-model="selected" :items="data" :buffer="32" :item-size="32" filterable style="width:300px;" clearable>
+      <virtual-select v-model="selected" :items="data" :buffer="32" :item-size="32" filterable filter-key="name" style="width:300px;" clearable>
         <template #default="{ item }">
           <el-option slot="default" :key="item.id" :label="item.name" :value="item.value"></el-option>
         </template>
