@@ -360,6 +360,7 @@ export default class ProTable extends Vue {
 .form-item {
   display: flex;
   margin-bottom: 0;
+  min-height: 40px;
 }
 /deep/.el-form-item__content {
   flex: 1;
