@@ -1,5 +1,4 @@
 [
-
   {
     "name": "开发指南",
     "groups": [
@@ -42,6 +41,10 @@
           {
             "path": "/protable",
             "title": "高级表格"
+          },
+          {
+            "path": "/multiSelectLessNode",
+            "title": "多选(节点数量控制)"
           }
         ]
       }   

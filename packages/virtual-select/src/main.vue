@@ -128,6 +128,7 @@
 <script>
 import { Select } from 'element-ui';
 import { RecycleScroller } from 'vue-virtual-scroller';
+import { throttle } from '../../../utils/index'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 
 export default {
@@ -243,7 +244,37 @@ export default {
         const { key } = $option.$vnode;
         this.$refs.virtualScroller.scrollToItem(key);
       }
-    }
+    },
+    // 重写select组件里边的方法
+    handleOptionSelect: throttle(function ut (option, byClick) {
+      if (this.multiple) {
+        const value = (this.value || []).slice();
+        const optionIndex = this.getValueIndex(value, option.value);
+        if (optionIndex > -1) {
+          value.splice(optionIndex, 1);
+        } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
+          value.push(option.value);
+        }
+        this.$emit('input', value);
+        this.emitChange(value);
+        if (option.created) {
+          this.query = '';
+          this.handleQueryChange('');
+          this.inputLength = 20;
+        }
+        if (this.filterable) this.$refs.input.focus();
+      } else {
+        this.$emit('input', option.value);
+        this.emitChange(option.value);
+        this.visible = false;
+      }
+      this.isSilentBlur = byClick;
+      this.setSoftFocus();
+      if (this.visible) return;
+      this.$nextTick(() => {
+        this.scrollToOption(option);
+      });
+    }, 500)
   }
 };
 </script>

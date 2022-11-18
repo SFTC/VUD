@@ -3,6 +3,8 @@ import MultiOption from './multi-option';
 import FormTable from './form-table';
 import FormDialog from './form-dialog';
 import VirtualSelect from './virtual-select';
+import MultiSelectLessNode from './multi-select-lessNode';
+
 import ProTable from './pro-table';
 // 组件列表
 const components = [
@@ -11,6 +13,7 @@ const components = [
   FormTable,
   FormDialog,
   VirtualSelect,
+  MultiSelectLessNode,
   ProTable
 ];
 const componentsName: string[] = [
@@ -19,6 +22,7 @@ const componentsName: string[] = [
   'FormTable',
   'FormDialog',
   'VirtualSelect',
+  'MultiSelectLessNode',
   'ProTable'
 ];
 
@@ -37,5 +41,6 @@ export default {
   FormDialog,
   FormTable,
   VirtualSelect,
+  MultiSelectLessNode,
   ProTable
 };

@@ -2,7 +2,7 @@
   <div>
     <div class="example-area">
       <div class="example__info">基础(10w条数据)</div>
-      <virtual-select v-model="selected" :items="data" :buffer="32" :item-size="32" filterable filter-key="name" style="width:300px;" clearable>
+      <virtual-select v-model="selected" :items="data" :buffer="32" :item-size="32" filterable filter-key="name" style="width:300px;" clearable @input="change">
         <template #default="{ item }">
           <el-option slot="default" :key="item.id" :label="item.name" :value="item.value"></el-option>
         </template>
@@ -11,7 +11,7 @@
     </div>
     <div class="example-area">
       <div class="example__info">多选(10w条数据)</div>
-      <virtual-select v-model="selected2" :items="data" :buffer="32" :item-size="32" filterable filter-key="name" style="width:300px;" clearable multiple>
+      <virtual-select v-model="selected2" :items="data" :buffer="32" :item-size="32" filterable filter-key="name" style="width:300px;" @input="change" clearable multiple>
         <template #default="{ item }">
           <el-option slot="default" :key="item.id" :label="item.name" :value="item.value" ></el-option>
         </template>
@@ -31,8 +31,8 @@
   </div>
 </template>
 <script>
-import CollapsePanel from '../components/CollapsePanel'
 import ApiContent from '../components/api'
+import CollapsePanel from '../components/CollapsePanel'
 import { config } from '../static/virtualselect'
 const lsa = require('../components/markdownfiles/VirtualSelect/VirtualSelect.md')
 const lsaAll = require('../components/markdownfiles/VirtualSelect/VirtualSelectMulit.md')
@@ -80,6 +80,11 @@ export default {
       return generateData(length);
     }
   },
+  methods:{
+    change(item){
+      console.log({item})
+    }
+  }
 };
 </script>
 <style scoped lang="less">
