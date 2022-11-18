@@ -83,6 +83,15 @@
         </el-col>
       </el-form>
       <div class="operate-bar">
+        <slot
+          name="preFormOperate"
+          :loading="loading"
+          :formData="formData"
+          :uploadTable="uploadTable"
+          :tableData="tableData"
+          :submitForm="selectSubmit"
+          :resetForm="resetFormData"
+        />
         <el-button
           :loading="loading"
           size="small"
@@ -118,6 +127,7 @@
       border
       :row-key="rowKey"
       v-bind="$attrs"
+      v-on="$listeners"
     >
       <template
         v-for="{
