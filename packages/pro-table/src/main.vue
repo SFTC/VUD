@@ -213,7 +213,7 @@ export default class ProTable extends Vue {
   readonly rowKey!: string;
 
   /** 分页的layout */
-  @Prop({ type: String, default: () => 'total, prev, pager, next, jumper, sizes' })
+  @Prop({ type: String, default: () => 'prev, pager, next, total, sizes' })
   readonly paginationLayout!: string;
 
   /** 页面大小 */
