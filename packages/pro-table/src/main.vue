@@ -177,12 +177,12 @@
       style="float: right; margin-right: -16px; margin-top: 16px"
       background
       :current-page="current"
-      :page-size="pageSizeData || pageSize"
+      :page-size="pageSizeConf"
       :pager-count="7"
-      layout="prev, pager, next, sizes"
       :total="total"
       :page-sizes="[5, 10, 20, 30, 40, 50, 100]"
       @current-change="pageChange"
+      :layout="paginationLayout"
       @size-change="sizeChange"
     >
     </el-pagination>
@@ -211,6 +211,10 @@ export default class ProTable extends Vue {
   /** 遍历的主键 */
   @Prop({ type: String, default: 'id' })
   readonly rowKey!: string;
+
+  /** 分页的layout */
+  @Prop({ type: String, default: () => 'prev, pager, next, total, sizes' })
+  readonly paginationLayout!: string;
 
   /** 页面大小 */
   @Prop({ type: Number, default: 50 })
@@ -283,6 +287,11 @@ export default class ProTable extends Vue {
     });
   }
 
+  get pageSizeConf () {
+    const { pageSizeData, pageSize } = this
+    return pageSizeData || pageSize
+  }
+
   /** 是否在加载中 */
   loading = false;
   formData: ProTableData['formData'] = this.createData();
@@ -308,11 +317,11 @@ export default class ProTable extends Vue {
 
   /** 获取数据信息 */
   getFormData () {
-    const { currentField, pageSizeField, current, pageSize, formData } = this;
+    const { currentField, pageSizeField, current, pageSizeConf, formData } = this;
     return {
       ...formData,
       [currentField]: current,
-      [pageSizeField]: pageSize
+      [pageSizeField]: pageSizeConf
     };
   }
 
